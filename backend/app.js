@@ -15,7 +15,7 @@ config({ path: "./config/config.env" });
 
 app.use(
   cors({
-    origin: "https://job-portal-mern-five.vercel.app",
+    origin: ["https://job-portal-mern-five.vercel.app"],
     credentials: true,
   })
 );
