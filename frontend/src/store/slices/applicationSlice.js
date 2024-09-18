@@ -83,94 +83,53 @@ const applicationSlice = createSlice({
 export const fetchEmployerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForAllApplications());
   try {
-    const response = await axios.get(
-      `http://localhost:4000/api/v1/application/employer/getall`,
-      {
-        withCredentials: true,
-      }
-    );
-    dispatch(
-      applicationSlice.actions.successForAllApplications(
-        response.data.applications
-      )
-    );
+    const response = await axios.get(`https://job-portal-mern-wcgv.vercel.app/api/v1/application/employer/getall`, {
+      withCredentials: true,
+    });
+    dispatch(applicationSlice.actions.successForAllApplications(response.data.applications));
     dispatch(applicationSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(
-      applicationSlice.actions.failureForAllApplications(
-        error.response.data.message
-      )
-    );
+    dispatch(applicationSlice.actions.failureForAllApplications(error.response.data.message));
   }
 };
 
 export const fetchJobSeekerApplications = () => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForMyApplications());
   try {
-    const response = await axios.get(
-      `http://localhost:4000/api/v1/application/jobseeker/getall`,
-      {
-        withCredentials: true,
-      }
-    );
-    dispatch(
-      applicationSlice.actions.successForMyApplications(
-        response.data.applications
-      )
-    );
+    const response = await axios.get(`https://job-portal-mern-wcgv.vercel.app/api/v1/application/jobseeker/getall`, {
+      withCredentials: true,
+    });
+    dispatch(applicationSlice.actions.successForMyApplications(response.data.applications));
     dispatch(applicationSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(
-      applicationSlice.actions.failureForMyApplications(
-        error.response.data.message
-      )
-    );
+    dispatch(applicationSlice.actions.failureForMyApplications(error.response.data.message));
   }
 };
 
 export const postApplication = (data, jobId) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForPostApplication());
   try {
-    const response = await axios.post(
-      `http://localhost:4000/api/v1/application/post/${jobId}`,
-      data,
-      {
-        withCredentials: true,
-        headers: { "Content-Type": "multipart/form-data" },
-      }
-    );
-    dispatch(
-      applicationSlice.actions.successForPostApplication(response.data.message)
-    );
+    const response = await axios.post(`https://job-portal-mern-wcgv.vercel.app/api/v1/application/post/${jobId}`, data, {
+      withCredentials: true,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    dispatch(applicationSlice.actions.successForPostApplication(response.data.message));
     dispatch(applicationSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(
-      applicationSlice.actions.failureForPostApplication(
-        error.response.data.message
-      )
-    );
+    dispatch(applicationSlice.actions.failureForPostApplication(error.response.data.message));
   }
 };
 
 export const deleteApplication = (id) => async (dispatch) => {
   dispatch(applicationSlice.actions.requestForDeleteApplication());
   try {
-    const response = await axios.delete(
-      `http://localhost:4000/api/v1/application/delete/${id}`,
-      { withCredentials: true }
-    );
-    dispatch(
-      applicationSlice.actions.successForDeleteApplication(
-        response.data.message
-      )
-    );
+    const response = await axios.delete(`https://job-portal-mern-wcgv.vercel.app/api/v1/application/delete/${id}`, {
+      withCredentials: true,
+    });
+    dispatch(applicationSlice.actions.successForDeleteApplication(response.data.message));
     dispatch(clearAllApplicationErrors());
   } catch (error) {
-    dispatch(
-      applicationSlice.actions.failureForDeleteApplication(
-        error.response.data.message
-      )
-    );
+    dispatch(applicationSlice.actions.failureForDeleteApplication(error.response.data.message));
   }
 };
 
